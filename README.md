@@ -1,2 +1,2 @@
-# nodejs-examples
-Este repositório contém exemplos de código e exercícios práticos em Node.js
+# Node.js examples
+Este repositório reúne exemplos de código e exercícios práticos em Node.js, cobrindo desde conceitos fundamentais até tópicos mais avançados. Nele, você encontrará diversos scripts e projetos que ilustram o desenvolvimento em Node.js, servindo como um registro do meu progresso de aprendizagem. Espero que este repositório seja uma fonte útil de referência para outros estudantes e desenvolvedores interessados em aprimorar suas habilidades em Node.js.
