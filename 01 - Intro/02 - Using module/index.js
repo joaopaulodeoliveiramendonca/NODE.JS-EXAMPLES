@@ -1,5 +1,5 @@
 const fs = require('fs')
 
-fs.readFile('arquivo.txt', 'utf8', (err, data) => {
+fs.readFile('gile.txt', 'utf8', (err, data) => {
   console.log(data)
 })
