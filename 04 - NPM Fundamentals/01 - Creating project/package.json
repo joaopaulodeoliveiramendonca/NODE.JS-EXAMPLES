@@ -1,11 +1,12 @@
 {
-  "name": "meu_projeto",
+  "name": "01---creating-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Matheus",
+  "keywords": [],
+  "author": "",
   "license": "ISC"
 }
