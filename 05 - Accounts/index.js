@@ -6,8 +6,7 @@ const fs = require('fs')
 operation()
 
 function operation() {
-  inquirer
-    .prompt([
+  inquirer.prompt([
       {
         type: 'list',
         name: 'action',
@@ -20,8 +19,8 @@ function operation() {
           'Sair',
         ],
       },
-    ])
-    .then((answer) => {
+    ]).then((answer) => {
+      
       const action = answer['action']
 
       if (action === 'Criar conta') {
@@ -154,7 +153,7 @@ function addAmount(accountName, amount) {
   )
 
   console.log(
-    chalk.green(`Foi depositado o valor de R$${amount} na sua conta!`),
+    chalk.green(`Foi depositado o valor de R$  ${amount} na sua conta!`),
   )
 }
 
