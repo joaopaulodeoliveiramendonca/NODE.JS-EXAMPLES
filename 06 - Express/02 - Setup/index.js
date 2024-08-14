@@ -7,5 +7,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`App rodando na porta:${port}`)
+  console.log(`App rodando em http://localhost:${port}`)
 })

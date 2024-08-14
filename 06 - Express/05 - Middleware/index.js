@@ -7,7 +7,7 @@ const path = require('path')
 const basePath = path.join(__dirname, 'templates')
 
 var checkAuth = function (req, res, next) {
-  req.authStatus = true
+  req.authStatus = false
 
   if (req.authStatus) {
     console.log('Está logado, pode continuar')
