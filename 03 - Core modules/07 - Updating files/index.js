@@ -1,77 +1,75 @@
-const http = require("http"); // English: Import the 'http' module to create an HTTP server.
-// Português: Importe o módulo 'http' para criar um servidor HTTP.
+// Importa o módulo 'http' para criar o servidor HTTP
+const http = require("http"); 
 
-const fs = require("fs"); // English: Import the 'fs' (File System) module to work with the file system in Node.js.
-// Português: Importe o módulo 'fs' (File System) para trabalhar com o sistema de arquivos no Node.js.
+// Importa o módulo 'fs' para manipular o sistema de arquivos
+const fs = require("fs"); 
 
-const url = require("url"); // English: Import the 'url' module to parse and work with URLs.
-// Português: Importe o módulo 'url' para analisar e trabalhar com URLs.
+// Importa o módulo 'url' para analisar URLs
+const url = require("url"); 
 
-const port = 3000; // English: Define a constant 'port' with the value 3000, specifying the port on which the server will listen.
-// Português: Defina uma constante 'port' com o valor 3000, especificando a porta na qual o servidor irá escutar.
+// Define a porta na qual o servidor irá escutar as requisições
+const port = 3000;
 
+// Cria um servidor HTTP
 const server = http.createServer((req, res) => { 
-  // English: Create an HTTP server that handles incoming requests and sends responses.
-  // Português: Crie um servidor HTTP que lida com requisições recebidas e envia respostas.
 
+  // Analisa a URL da requisição e extrai as informações da query string
   var urlInfo = require("url").parse(req.url, true); 
-  // English: Parse the request URL to extract query parameters. 
-  // The 'true' argument indicates that the query parameters should be parsed into an object.
-  // Português: Analise a URL da requisição para extrair os parâmetros de consulta. 
-  // O argumento 'true' indica que os parâmetros de consulta devem ser analisados em um objeto.
 
+  // Obtém o valor do parâmetro 'name' da query string
   const name = urlInfo.query.name; 
-  // English: Extract the 'name' query parameter from the parsed URL.
-  // Português: Extraia o parâmetro de consulta 'name' da URL analisada.
 
+  // Define o código de status da resposta como 200 (OK)
   res.statusCode = 200; 
-  // English: Set the HTTP status code to 200, indicating a successful request.
-  // Português: Defina o código de status HTTP como 200, indicando uma requisição bem-sucedida.
 
+  // Define o cabeçalho da resposta para indicar que o conteúdo é HTML
   res.setHeader("Content-Type", "text/html"); 
-  // English: Set the Content-Type header to 'text/html', indicating that the response is HTML.
-  // Português: Defina o cabeçalho Content-Type como 'text/html', indicando que a resposta é HTML.
 
+  // Verifica se o parâmetro 'name' não está presente
   if (!name) { 
-    // English: If the 'name' query parameter is not provided, read and send the content of 'index.html'.
-    // Português: Se o parâmetro de consulta 'name' não for fornecido, leia e envie o conteúdo do arquivo 'index.html'.
+    // Se o parâmetro 'name' não está presente, lê o arquivo 'index.html'
     fs.readFile("index.html", function (err, data) { 
+      // Verifica se houve um erro ao ler o arquivo
       if (err) {
+        // Se houve erro, responde com um código de status 500 (Erro Interno do Servidor)
+        // e um corpo de resposta simples indicando erro
         res.writeHead(500, { "Content-Type": "text/plain" });
         res.end("Internal Server Error");
-        return;
+        return; // Interrompe a execução da função callback
       }
 
+      // Se não houve erro, responde com um código de status 200 (OK)
+      // e define o tipo de conteúdo como 'text/html'
       res.writeHead(200, { "Content-Type": "text/html" }); 
+      // Envia o conteúdo do arquivo como corpo da resposta
       res.write(data); 
-      return res.end(); 
+      return res.end(); // Finaliza a resposta
     });
   } else { 
-    // English: If the 'name' query parameter is provided, append the value to 'file.txt' and redirect to the root URL.
-    // Português: Se o parâmetro de consulta 'name' for fornecido, adicione o valor ao arquivo 'file.txt' e redirecione para a URL raiz.
-    const nameNewLine = name + "\r\n"; 
-    // English: Prepare the 'name' value with a newline character for appending to the file.
-    // Português: Prepare o valor 'name' com um caractere de nova linha para adicionar ao arquivo.
-
+    // Se o parâmetro 'name' está presente, adiciona o valor ao arquivo 'file.txt'
+    const nameNewLine = name + "\r\n"; // Adiciona uma nova linha após o nome
+    
     fs.appendFile("file.txt", nameNewLine, function (err) { 
+      // Verifica se houve um erro ao adicionar ao arquivo
       if (err) {
+        // Se houve erro, responde com um código de status 500 (Erro Interno do Servidor)
+        // e um corpo de resposta simples indicando erro
         res.writeHead(500, { "Content-Type": "text/plain" });
         res.end("Internal Server Error");
-        return;
+        return; // Interrompe a execução da função callback
       }
 
+      // Se não houve erro, responde com um código de status 302 (Redirecionamento Temporário)
+      // e define o cabeçalho 'Location' para redirecionar para a página inicial
       res.writeHead(302, {
-        Location: "/", // English: Redirect to the root URL after appending to the file.
-        // Português: Redirecione para a URL raiz após adicionar ao arquivo.
+        Location: "/",
       }); 
-      return res.end(); 
+      return res.end(); // Finaliza a resposta
     });
   }
 });
 
+// Faz o servidor escutar na porta definida e exibe uma mensagem no console quando o servidor estiver pronto
 server.listen(port, () => { 
-  // English: Start the server and listen on the specified port. 
-  // When the server is running, log a message with the port number.
-  // Português: Inicie o servidor e escute na porta especificada. Quando o servidor estiver em execução, registre uma mensagem com o número da porta.
-  console.log(`Servidor rodando na porta: ${port}`);
+  console.log(`Server running on the port http://localhost:${port}`);
 });

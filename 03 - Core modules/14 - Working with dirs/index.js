@@ -1,25 +1,17 @@
+// Importa o módulo 'fs' (file system) para operações de leitura e escrita de arquivos e manipulação de diretórios
 const fs = require("fs");
-// English: Import the 'fs' module for file system operations.
-// Português: Importa o módulo 'fs' para operações no sistema de arquivos.
 
-if (!fs.existsSync("./minhapasta")) {
-  // English: Check if the directory 'minhapasta' does not exist.
-  // Português: Verifica se o diretório 'minhapasta' não existe.
-
-  console.log("Não existe");
-  // English: Log a message to the console indicating that the directory does not exist.
-  // Português: Exibe uma mensagem no console indicando que o diretório não existe.
+// Verifica se o diretório './my_folder' existe
+if (!fs.existsSync("./my_folder")) {
+  // Se o diretório não existir, exibe a mensagem "Não existe"
+  console.log("Does not exist");
 }
 
-fs.mkdirSync("minhapasta");
-// English: Create a new directory named 'minhapasta'.
-// Português: Cria um novo diretório chamado 'minhapasta'.
+// Cria o diretório 'my_folder' de forma síncrona
+fs.mkdirSync("my_folder");
 
-if (fs.existsSync("minhapasta")) {
-  // English: Check if the directory 'minhapasta' now exists.
-  // Português: Verifica se o diretório 'minhapasta' agora existe.
-
-  console.log("Existe");
-  // English: Log a message to the console indicating that the directory exists.
-  // Português: Exibe uma mensagem no console indicando que o diretório existe.
+// Verifica novamente se o diretório 'my_folder' existe
+if (fs.existsSync("my_folder")) {
+  // Se o diretório existir, exibe a mensagem "Existe"
+  console.log("Exists");
 }

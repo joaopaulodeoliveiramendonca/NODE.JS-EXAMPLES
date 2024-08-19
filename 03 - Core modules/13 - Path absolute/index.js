@@ -1,23 +1,19 @@
-const path = require('path'); 
-// English: Import the 'path' module for path operations.
-// Português: Importa o módulo 'path' para operações com caminhos.
+// Importa o módulo 'path' para manipulação e análise de caminhos de arquivos e diretórios
+const path = require('path');
 
-console.log(path.resolve('test.txt')); 
-// English: Log the absolute path of 'teste.txt' from the current working directory.
-// Português: Exibe o caminho absoluto de 'teste.txt' a partir do diretório de trabalho atual.
+// Resolve o caminho absoluto para o arquivo 'test.txt' baseado no diretório atual
+console.log(path.resolve('test.txt'));
+// Saída: Caminho absoluto completo para 'test.txt', por exemplo: '/home/user/project/test.txt'
 
-const midFolder = 'relatorios'; 
-// English: Define a variable for a folder name 'relatorios'.
-// Português: Define uma variável para o nome de uma pasta 'relatorios'.
+// Define uma variável com o nome de um subdiretório
+const midFolder = 'relatorios';
 
+// Define uma variável com o nome de um arquivo
 const fileName = 'matheus.txt'; 
-// English: Define a variable for a file name 'matheus.txt'.
-// Português: Define uma variável para o nome de um arquivo 'matheus.txt'.
 
+// Junta diferentes partes do caminho em um único caminho, começando pela raiz
 const finalPath = path.join('/', 'arquivos', midFolder, fileName); 
-// English: Join the path segments into a single path '/arquivos/relatorios/matheus.txt'.
-// Português: Une os segmentos de caminho em um único caminho '/arquivos/relatorios/matheus.txt'.
 
+// Exibe o caminho final resultante da junção
 console.log(finalPath); 
-// English: Log the final path created by joining the segments.
-// Português: Exibe o caminho final criado ao unir os segmentos.
+// Saída: '/arquivos/relatorios/matheus.txt'

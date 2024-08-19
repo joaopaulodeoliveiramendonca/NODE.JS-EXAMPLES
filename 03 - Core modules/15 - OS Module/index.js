@@ -1,19 +1,14 @@
-const os = require("os"); 
-// English: Import the 'os' module for operating system-related utilities.
-// Português: Importa o módulo 'os' para utilitários relacionados ao sistema operacional.
+// Importa o módulo 'os' (operating system) que fornece informações sobre o sistema operacional
+const os = require("os");
 
-console.log(os.cpus()); 
-// English: Log information about the CPU cores of the system.
-// Português: Exibe informações sobre os núcleos da CPU do sistema.
+// Exibe informações sobre os CPUs do sistema, como o número de núcleos e detalhes dos processadores
+console.log(os.cpus());
 
-console.log(os.freemem()); 
-// English: Log the amount of free system memory in bytes.
-// Português: Exibe a quantidade de memória livre do sistema em bytes.
+// Exibe a quantidade de memória livre disponível no sistema em bytes
+console.log(os.freemem());
 
-console.log(os.homedir()); 
-// English: Log the path to the current user's home directory.
-// Português: Exibe o caminho para o diretório home do usuário atual.
+// Exibe o diretório inicial do usuário atual, que é onde geralmente são armazenados arquivos pessoais
+console.log(os.homedir());
 
-console.log(os.type()); 
-// English: Log the operating system name (e.g., 'Linux', 'Darwin', 'Windows_NT').
-// Português: Exibe o nome do sistema operacional (por exemplo, 'Linux', 'Darwin', 'Windows_NT').
+// Exibe o tipo do sistema operacional, como 'Linux', 'Darwin' (para macOS), ou 'Windows_NT'
+console.log(os.type());

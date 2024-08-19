@@ -1,21 +1,21 @@
-const http = require('http'); // English: Import the 'http' module to create an HTTP server.
-// Português: Importe o módulo 'http' para criar um servidor HTTP.
+// Importa o módulo 'http', que fornece funcionalidades para criar e gerenciar servidores HTTP
+const http = require('http');
 
-const port = 3000; // English: Define a constant 'port' and assign it the value 3000, specifying the port on which the server will listen.
-// Português: Defina uma constante 'port' e atribua a ela o valor 3000, especificando a porta na qual o servidor irá escutar.
+// Define a porta em que o servidor irá escutar as requisições
+const port = 3000;
 
+// Cria um servidor HTTP
 const server = http.createServer((req, res) => { 
-  // English: Create an HTTP server that handles incoming requests and sends responses.
-  // Português: Crie um servidor HTTP que lida com requisições recebidas e envia respostas.
-  res.write('HELLO HTTP'); // English: Send the text 'HELLO HTTP' as the response to the client.
-  // Português: Envie o texto 'HELLO HTTP' como resposta ao cliente.
-  res.end(); // English: End the response to the client.
-  // Português: Encerre a resposta ao cliente.
+  // Função de callback que será chamada sempre que o servidor receber uma requisição
+  
+  // Envia a resposta 'Hello HTTP' ao cliente
+  res.write('Hello HTTP');
+  
+  // Finaliza a resposta, indicando que não há mais dados a serem enviados
+  res.end();
 });
 
+// Faz o servidor escutar na porta definida e exibe uma mensagem no console quando o servidor estiver pronto
 server.listen(port, () => { 
-  // English: Start the server and listen on the specified port. 
-  // When the server is running, log a message with the port number.
-  // Português: Inicie o servidor e escute na porta especificada. Quando o servidor estiver em execução, registre uma mensagem com o número da porta.
-  console.log(`Server running on the port: ${port}`);
+  console.log(`Server running on the port http://localhost:${port}`);
 });

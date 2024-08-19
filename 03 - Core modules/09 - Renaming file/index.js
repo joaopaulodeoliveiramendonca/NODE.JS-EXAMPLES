@@ -1,25 +1,19 @@
+// Importa o módulo 'fs' para operações com o sistema de arquivos
 const fs = require('fs'); 
-// English: Import the 'fs' module for file system operations.
-// Português: Importa o módulo 'fs' para operações no sistema de arquivos.
 
+// Renomeia o arquivo 'file.txt' para 'new-file.txt'
 fs.rename('file.txt', 'new-file.txt', function (err) { 
-  // English: Rename the file 'file.txt' to 'new-file.txt'.
-  // Português: Renomeia o arquivo 'file.txt' para 'new-file.txt'.
-  
+
+  // Verifica se houve um erro ao tentar renomear o arquivo
   if (err) { 
-    // English: Check if there was an error during the renaming process.
-    // Português: Verifica se houve um erro durante o processo de renomeação.
 
+    // Se houver erro, exibe o erro no console
     console.log(err); 
-    // English: Log the error to the console if one occurred.
-    // Português: Exibe o erro no console, se ocorrer.
 
+    // Interrompe a execução da função callback
     return; 
-    // English: Exit the function if an error occurred.
-    // Português: Sai da função se ocorreu um erro.
   }
 
+  // Se a renomeação do arquivo for bem-sucedida, exibe uma mensagem no console
   console.log('File renamed!'); 
-  // English: Log a success message to the console if the file was renamed successfully.
-  // Português: Exibe uma mensagem de sucesso no console se o arquivo foi renomeado com sucesso.
 });

@@ -1,30 +1,29 @@
-const url = require('url'); // English: Import the 'url' module to work with URLs in Node.js.
-// Português: Importe o módulo 'url' para trabalhar com URLs no Node.js.
+// Importa o módulo 'url', que fornece funcionalidades para lidar com URLs
+const url = require('url');
 
+// Define uma URL de exemplo para análise
 const address = 'https://www.mywebsite.com/catalog?products=chair'; 
-// English: Define a constant 'address' with the URL to be parsed.
-// Português: Defina uma constante 'address' com a URL a ser analisada.
 
+// Usa o construtor URL para criar um objeto URL a partir da string de URL fornecida
 const parsedUrl = new url.URL(address); 
-// English: Create a new URL object by parsing the 'address' string.
-// Português: Crie um novo objeto URL analisando a string 'address'.
 
+// Exibe o host da URL, que é a parte do domínio da URL
 console.log(parsedUrl.host); 
-// English: Print the host of the parsed URL (e.g., 'www.mywebsite.com').
-// Português: Exiba o host da URL analisada (por exemplo, 'www.mywebsite.com').
+// Saída esperada: 'www.mywebsite.com'
 
+// Exibe o caminho da URL, que é a parte após o domínio
 console.log(parsedUrl.pathname); 
-// English: Print the pathname of the parsed URL (e.g., '/catalog').
-// Português: Exiba o pathname da URL analisada (por exemplo, '/catalog').
+// Saída esperada: '/catalog'
 
+// Exibe a string de consulta da URL, que inclui os parâmetros após o ponto de interrogação
 console.log(parsedUrl.search); 
-// English: Print the query string of the parsed URL (e.g., '?products=chair').
-// Português: Exiba a string de consulta da URL analisada (por exemplo, '?products=chair').
+// Saída esperada: '?products=chair'
 
+// Exibe o objeto `searchParams`, que é uma instância da interface `URLSearchParams`
+// e fornece métodos para manipular os parâmetros de consulta
 console.log(parsedUrl.searchParams); 
-// English: Print the URLSearchParams object containing the query parameters.
-// Português: Exiba o objeto URLSearchParams contendo os parâmetros da consulta.
+// Saída esperada: URLSearchParams { 'products' => 'chair' }
 
+// Obtém o valor do parâmetro de consulta 'products' e exibe-o
 console.log(parsedUrl.searchParams.get('products')); 
-// English: Print the value of the 'products' query parameter (e.g., 'chair').
-// Português: Exiba o valor do parâmetro de consulta 'products' (por exemplo, 'chair').
+// Saída esperada: 'chair'
