@@ -1,22 +1,18 @@
+// Importa o módulo 'fs' (sistema de arquivos) para manipulação de arquivos
 const fs = require("fs"); 
-// English: Import the 'fs' module for file system operations.
-// Português: Importa o módulo 'fs' para operações no sistema de arquivos.
 
+// Exibe 'Start' no console antes de qualquer operação de arquivo
 console.log("Start"); 
-// English: Logs 'Start' to the console.
-// Português: Exibe 'Start' no console.
 
-fs.writeFile("arquivo.txt", "Oi", function (err) {
-  // English: Write 'Oi' to 'arquivo.txt'. This function is called once the file writing is complete.
-  // Português: Escreve 'Oi' no arquivo 'arquivo.txt'. Esta função é chamada após a conclusão da escrita do arquivo.
-
+// Usa 'fs.writeFile' para criar um arquivo chamado 'file.txt' com o conteúdo 'Hello'
+// A função callback é executada após a operação de escrita ser concluída
+fs.writeFile("async.txt", "Hello Async", function (err) {
+  // Dentro do callback de 'writeFile', um 'setTimeout' é usado para criar uma pausa de 1 segundo
   setTimeout(function () {
+    // Exibe 'File created!' no console após 1 segundo, indicando que o arquivo foi criado
     console.log("File created!"); 
-    // English: Log 'File created!' to the console after a 1-second delay.
-    // Português: Exibe 'File created!' no console após um atraso de 1 segundo.
-  }, 1000);
+  }, 1000); // 1000 milissegundos = 1 segundo
 });
 
+// Exibe 'End' no console imediatamente após a chamada de 'fs.writeFile', antes que o callback tenha a chance de ser executado
 console.log("End"); 
-// English: Logs 'End' to the console.
-// Português: Exibe 'End' no console.

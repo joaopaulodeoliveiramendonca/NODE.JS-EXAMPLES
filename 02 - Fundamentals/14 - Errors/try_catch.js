@@ -1,13 +1,12 @@
+// Define uma variável 'x' com o valor 10
 const x = 10;
-// English: Declare a constant variable x with the value 10.
-// Português: Declara uma variável constante x com o valor 10.
 
 try {
+  // Tenta atribuir o valor 2 à variável 'x'
+  // Isso vai gerar um erro porque 'x' é uma constante e não pode ser reatribuída
   x = 2; 
-  // English: Attempt to assign a new value 2 to the constant variable x, which will cause an error.
-  // Português: Tenta atribuir um novo valor 2 à variável constante x, o que causará um erro.
 } catch (err) {
+  // Captura e trata o erro que ocorre dentro do bloco 'try'
+  // Exibe a mensagem de erro no console
   console.log(`Error: ${err}`); 
-  // English: Catch the error and log it to the console.
-  // Português: Captura o erro e o exibe no console.
 }

@@ -1,26 +1,21 @@
+// Importa o módulo 'events' que fornece a classe 'EventEmitter' para gerenciar eventos
 const EventEmitter = require('events'); 
-// English: Import the EventEmitter class from the 'events' module.
-// Português: Importa a classe EventEmitter do módulo 'events'.
 
+// Cria uma instância de 'EventEmitter' para gerenciar e emitir eventos
 const eventEmitter = new EventEmitter(); 
-// English: Create a new instance of EventEmitter to handle events.
-// Português: Cria uma nova instância de EventEmitter para gerenciar eventos.
 
-// Set up an event listener for the 'start' event
+// Registra um listener para o evento 'start'
+// Quando o evento 'start' é emitido, a função callback é executada
 eventEmitter.on('start', () => {
-  console.log('During'); 
-  // English: When the 'start' event is emitted, this callback logs 'During' to the console.
-  // Português: Quando o evento 'start' é emitido, esse callback exibe 'During' no console.
+  console.log('During'); // Exibe 'During' no console quando o evento 'start' é emitido
 });
 
+// Exibe 'Before' no console antes do evento ser emitido
 console.log('Before'); 
-// English: Logs 'Before' to the console before emitting the event.
-// Português: Exibe 'Before' no console antes de emitir o evento.
 
+// Emite o evento 'start'
+// Isso aciona a execução do listener registrado anteriormente
 eventEmitter.emit('start'); 
-// English: Emit the 'start' event, triggering the associated event listener.
-// Português: Emite o evento 'start', acionando o listener associado.
 
+// Exibe 'After' no console após o evento ter sido emitido e o listener ter sido executado
 console.log('After'); 
-// English: Logs 'After' to the console after emitting the event.
-// Português: Exibe 'After' no console após emitir o evento.

@@ -1,31 +1,21 @@
-// Order c -> a -> b
+// Ordem c -> a -> b
 
+// Define a função 'a' que exibe "Running a()" no console
 function a() {
   console.log("Running a()");
-  // English: This function logs "Running a()" to the console.
-  // Português: Esta função exibe "Running a()" no console.
 }
 
+// Define a função 'b' que exibe "Running b()" no console
 function b() {
   console.log("Running b()");
-  // English: This function logs "Running b()" to the console.
-  // Português: Esta função exibe "Running b()" no console.
 }
 
+// Define a função 'c' que exibe "Running c()" no console, e depois chama as funções 'a' e 'b'
 function c() {
   console.log("Running c()");
-  // English: This function logs "Running c()" to the console.
-  // Português: Esta função exibe "Running c()" no console.
-
-  a();
-  // English: Calls function 'a', which logs "Running a()" to the console.
-  // Português: Chama a função 'a', que exibe "Running a()" no console.
-
-  b();
-  // English: Calls function 'b', which logs "Running b()" to the console.
-  // Português: Chama a função 'b', que exibe "Running b()" no console.
+  a(); // Chama a função 'a'
+  b(); // Chama a função 'b'
 }
 
+// Chama a função 'c', que por sua vez chama 'a' e 'b'
 c();
-// English: Calls function 'c', which executes and logs the messages in the order: "Running c()", "Running a()", and "Running b()".
-// Português: Chama a função 'c', que executa e exibe as mensagens na ordem: "Running c()", "Running a()" e "Running b()".

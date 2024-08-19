@@ -1,16 +1,12 @@
+// Importa o módulo 'fs' (sistema de arquivos) para manipulação de arquivos
 const fs = require("fs"); 
-// English: Import the 'fs' module for file system operations.
-// Português: Importa o módulo 'fs' para operações no sistema de arquivos.
 
+// Exibe 'Start' no console antes de qualquer operação de arquivo
 console.log("Start"); 
-// English: Logs 'Start' to the console.
-// Português: Exibe 'Start' no console.
 
-// Synchronously write 'Hi' to 'arquivo.txt'
-fs.writeFileSync("arquivo.txt", "Hi"); 
-// English: Synchronously writes 'Hi' to 'arquivo.txt'. This operation blocks the thread until it's complete.
-// Português: Escreve 'Hi' de forma síncrona no arquivo 'arquivo.txt'. Esta operação bloqueia a thread até ser concluída.
+// Usa 'fs.writeFileSync' para criar um arquivo chamado 'file.txt' com o conteúdo 'Hi'
+// 'writeFileSync' é uma versão síncrona que bloqueia a execução até a operação ser concluída
+fs.writeFileSync("sync.txt", "Hello Sync"); 
 
+// Exibe 'End' no console após a conclusão da operação de escrita
 console.log("End"); 
-// English: Logs 'End' to the console.
-// Português: Exibe 'End' no console.
