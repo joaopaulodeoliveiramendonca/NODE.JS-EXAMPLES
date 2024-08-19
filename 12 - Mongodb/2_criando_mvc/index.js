@@ -6,7 +6,7 @@ const conn = require('./db/conn').run
 
 const productsRoutes = require('./routes/productsRoutes')
 
-app.engine('handlebars', exphbs())
+app.engine('handlebars', exphbs.engine())
 app.set('view engine', 'handlebars')
 
 app.use(

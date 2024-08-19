@@ -5,7 +5,7 @@ const app = express()
 
 const conn = require('./db/conn')
 
-app.engine('handlebars', exphbs())
+app.engine('handlebars', exphbs.engine())
 app.set('view engine', 'handlebars')
 
 app.use(

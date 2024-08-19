@@ -11,7 +11,7 @@ const Task = require('./models/Task')
 // routes
 const taskRoutes = require('./routes/tasksRoutes')
 
-app.engine('handlebars', exphbs())
+app.engine('handlebars', exphbs.engine())
 app.set('view engine', 'handlebars')
 
 app.use(
