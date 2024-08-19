@@ -1,26 +1,26 @@
-// --nome=Matheus --idade=30
+// Para executar use: node index.js --nome=Joao --idade=24
+// Esse comentário orienta o usuário a executar o script no terminal, passando os argumentos `--nome=Joao` e `--idade=24`
+
+// Importa o módulo 'minimist', que é utilizado para processar os argumentos passados via linha de comando de maneira mais conveniente
 const minimist = require("minimist");
-// English: Import the 'minimist' module to parse command-line arguments into a more manageable object format.
-// Português: Importe o módulo 'minimist' para analisar os argumentos de linha de comando em um formato de objeto mais manejável.
 
+// Usa o módulo 'minimist' para processar os argumentos passados, removendo os dois primeiros itens (caminho do Node.js e do script) com 'slice(2)'
+// 'minimist' converte os argumentos em um objeto onde cada opção é uma chave com o valor associado
 const args = minimist(process.argv.slice(2));
-// English: Use 'minimist' to parse the command-line arguments (excluding the first two elements of 'process.argv') into an object.
-// The object will have properties corresponding to the flags and values provided on the command line.
-// Português: Use 'minimist' para analisar os argumentos de linha de comando (excluindo os dois primeiros elementos de 'process.argv') em um objeto.
-// O objeto terá propriedades correspondentes às flags e valores fornecidos na linha de comando.
 
+// Exibe no console o objeto 'args', que contém os argumentos passados pelo usuário como pares chave-valor
 console.log(args);
-// English: Log the parsed arguments object to the console. This shows the flags and their corresponding values as key-value pairs.
-// Português: Exiba o objeto de argumentos analisado no console. Isso mostra as flags e seus valores correspondentes como pares chave-valor.
 
+// Acessa o valor do argumento '--nome' a partir do objeto 'args' e armazena na variável 'nome'
+// Neste caso, o valor será "Joao"
 const nome = args["nome"];
-const idade = args["idade"];
-// English: Retrieve the values for the 'nome' and 'idade' flags from the parsed arguments object.
-// 'nome' will be 'Matheus' and 'idade' will be '30' based on the command-line input.
-// Português: Recupere os valores para as flags 'nome' e 'idade' do objeto de argumentos analisado.
-// 'nome' será 'Matheus' e 'idade' será '30' com base na entrada da linha de comando.
 
+// Acessa o valor do argumento '--idade' a partir do objeto 'args' e armazena na variável 'idade'
+// Neste caso, o valor será "24"
+const idade = args["idade"];
+
+// Exibe no console o valor do argumento 'nome', neste caso "Joao"
 console.log(nome);
+
+// Exibe no console o valor do argumento 'idade', neste caso "24"
 console.log(idade);
-// English: Log the values of 'nome' and 'idade' to the console.
-// Português: Exiba os valores de 'nome' e 'idade' no console.

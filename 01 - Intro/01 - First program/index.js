@@ -100,3 +100,6 @@ console.dir(person);
 console.count("Contagem");
 console.count("Contagem");
 console.count("Contagem");
+
+process.exit(); // Encerra o processo imediatamente
+
