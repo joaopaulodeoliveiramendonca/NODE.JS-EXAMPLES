@@ -1,35 +1,28 @@
+// Importa o módulo 'inquirer', que é usado para criar prompts interativos no terminal
 const inquirer = require('inquirer'); 
-// English: Import the 'inquirer' library for handling interactive prompts in the terminal.
-// Português: Importa a biblioteca 'inquirer' para lidar com prompts interativos no terminal.
 
-// Prompt the user for two grades
+// Usa o método 'prompt' do 'inquirer' para exibir perguntas e capturar as respostas do usuário
 inquirer
   .prompt([
+    // Define a primeira pergunta com o nome 'p1' e a mensagem 'What is the first grade?'
     { name: 'p1', message: 'What is the first grade?' },
+    // Define a segunda pergunta com o nome 'p2' e a mensagem 'What is the second grade?'
     { name: 'p2', message: 'What is the second grade?' },
   ])
+  // Depois que o usuário responde às perguntas, o 'then' é chamado com as respostas
   .then((answers) => {
-    // English: Once the user answers the prompts, the 'answers' object contains their responses.
-    // Português: Depois que o usuário responde aos prompts, o objeto 'answers' contém suas respostas.
-    
-    // Output the user's answers
+    // Exibe as respostas no console
+    // 'answers' é um objeto onde as chaves correspondem aos nomes das perguntas definidas anteriormente
     console.log(answers);
-    // English: Print the user's answers to the console.
-    // Português: Exibe as respostas do usuário no console.
-    
-    // Calculate the average of the two grades
+
+    // Calcula a média das notas fornecidas
+    // 'parseInt' é usado para converter as respostas de string para números inteiros
     const media = (parseInt(answers.p1) + parseInt(answers.p2)) / 2;
-    // English: Calculate the average of the two grades by converting the string responses to integers.
-    // Português: Calcula a média das duas notas convertendo as respostas em strings para inteiros.
-    
-    // Output the average grade
+
+    // Exibe a média das notas no console
     console.log(`The average grade is ${media}`);
-    // English: Print the calculated average grade to the console.
-    // Português: Exibe a média calculada no console.
   })
+  // Captura e exibe qualquer erro que ocorra durante a execução do prompt
   .catch((err) => {
-    // Handle any errors that occur during the prompts
     console.log(err);
-    // English: Print any errors that occur during the prompt process to the console.
-    // Português: Exibe qualquer erro que ocorra durante o processo de prompt no console.
   });

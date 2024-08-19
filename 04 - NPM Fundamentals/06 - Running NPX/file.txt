@@ -1,1 +1,33 @@
 npx cowsay -d "Hello World"
+
+O comando npx cowsay -d "Hello World" combina duas ferramentas do Node.js e executa a função de uma delas. Aqui está o que cada parte faz:
+
+npx:
+
+npx é um utilitário incluído com o Node.js que executa pacotes de npm. Ele permite que você execute pacotes Node.js sem precisar instalá-los globalmente. Se o pacote não estiver instalado globalmente, npx irá baixá-lo e executá-lo temporariamente.
+cowsay:
+
+cowsay é um pacote Node.js que gera uma mensagem de texto estilizada como se fosse "dizida" por uma vaca ASCII. É um programa divertido que exibe uma vaca (ou outros animais) falando a mensagem fornecida.
+-d:
+
+A opção -d é um argumento que você pode passar para o cowsay para exibir a vaca com uma "expressão triste" em vez da expressão padrão (feliz).
+"Hello World":
+
+Este é o texto que a vaca ASCII dirá. No exemplo, a vaca dirá "Hello World".
+O que o comando faz:
+Quando você executa npx cowsay -d "Hello World", o npx baixa e executa o pacote cowsay (se não estiver instalado globalmente), e o cowsay gera uma representação ASCII com uma vaca que "diz" "Hello World" com uma expressão triste.
+
+Saída Esperada:
+O comando resultará em algo como isto no terminal:
+
+markdown
+Copiar código
+ ___________
+< Hello World >
+ -----------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+Aqui, a vaca está "dizendo" "Hello World" com uma expressão triste.
