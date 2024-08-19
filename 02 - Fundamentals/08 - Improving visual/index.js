@@ -1,19 +1,16 @@
-const chalk = require("chalk"); // Import the chalk library
-// English: The 'chalk' library is used for styling the console output with colors and styles.
-// Português: A biblioteca 'chalk' é usada para estilizar a saída do console com cores e estilos.
+// Importa o módulo 'chalk', que permite estilizar o texto no console com cores e estilos
+const chalk = require("chalk");
 
-const nota = 5; // The grade to be evaluated
-// English: Define a variable 'nota' representing the grade to be evaluated.
-// Português: Define uma variável 'nota' representando a nota a ser avaliada.
+// Declara uma constante 'nota' com o valor 5
+const nota = 5;
 
+// Verifica se a 'nota' é maior ou igual a 7
 if (nota >= 7) {
-  // If the grade is 7 or higher, print a success message in green with bold text
+  // Se a condição for verdadeira, exibe uma mensagem em verde e negrito usando 'chalk'
+  // 'chalk.green.bold()' estiliza o texto para ser verde e negrito
   console.log(chalk.green.bold("Congratulations, you passed!"));
-  // English: Use 'chalk.green.bold' to style the message with green color and bold text, indicating success.
-  // Português: Use 'chalk.green.bold' para estilizar a mensagem com cor verde e texto em negrito, indicando sucesso.
 } else {
-  // If the grade is below 7, print a warning message with a red background and black text
+  // Se a condição for falsa, exibe uma mensagem com fundo vermelho e texto preto usando 'chalk'
+  // 'chalk.bgRed.black()' estiliza o texto para ter um fundo vermelho e texto preto
   console.log(chalk.bgRed.black("You need to take the final exam!"));
-  // English: Use 'chalk.bgRed.black' to style the message with a red background and black text, indicating a warning.
-  // Português: Use 'chalk.bgRed.black' para estilizar a mensagem com fundo vermelho e texto preto, indicando um aviso.
 }
