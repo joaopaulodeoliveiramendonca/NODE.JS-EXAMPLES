@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD de Usuários</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    table, th, td { border: 1px solid #ddd; }
+    th, td { padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+    form { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h1>CRUD de Usuários</h1>
+  <form id="userForm">
+    <input type="hidden" id="userId"> <!-- Campo oculto para armazenar o ID do usuário durante a edição -->
+    <input type="text" id="userName" placeholder="Nome" required> <!-- Campo para o nome do usuário -->
+    <input type="text" id="userEmail" placeholder="Email" required> <!-- Campo para o email do usuário -->
+    <button type="submit">Salvar Usuário</button> <!-- Botão para enviar o formulário -->
+  </form>
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ações</th> <!-- Coluna para os botões de ação -->
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <script>
+    const form = document.getElementById('userForm');
+    const tableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+
+    // Função para manipular o envio do formulário
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Evita o envio padrão do formulário
+      const id = document.getElementById('userId').value;
+      const name = document.getElementById('userName').value;
+      const email = document.getElementById('userEmail').value;
+      const method = id ? 'PUT' : 'POST'; // Se id estiver presente, é uma atualização, caso contrário, é uma criação
+      const url = id ? `/users/${id}` : '/users'; // Corrigido para template literals
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email })
+      });
+      if (response.ok) {
+        form.reset(); // Limpa o formulário após o envio
+        loadUsers(); // Recarrega a lista de usuários
+      }
+    });
+
+    // Função para carregar e exibir os usuários na tabela
+    const loadUsers = async () => {
+      const response = await fetch('/users');
+      const users = await response.json();
+      tableBody.innerHTML = ''; // Limpa a tabela antes de adicionar novos dados
+      users.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.id}</td>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>
+            <button onclick="editUser(${user.id}, '${user.name}', '${user.email}')">Editar</button>
+            <button onclick="deleteUser(${user.id})">Excluir</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    };
+
+    // Função para preencher o formulário com os dados do usuário para edição
+    const editUser = (id, name, email) => {
+      document.getElementById('userId').value = id;
+      document.getElementById('userName').value = name;
+      document.getElementById('userEmail').value = email;
+    };
+
+    // Função para deletar um usuário
+    const deleteUser = async (id) => {
+      const response = await fetch(`/users/${id}`, { method: 'DELETE' });
+      if (response.ok) {
+        loadUsers(); // Recarrega a lista de usuários após a exclusão
+      }
+    };
+
+    // Carrega a lista de usuários quando a página é carregada
+    loadUsers();
+  </script>
+</body>
+</html>

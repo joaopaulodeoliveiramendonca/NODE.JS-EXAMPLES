@@ -1,247 +1,281 @@
-const inquirer = require('inquirer')
-const chalk = require('chalk')
+// Importa o módulo `inquirer` para criar prompts interativos no terminal
+const inquirer = require('inquirer');
 
-const fs = require('fs')
+// Importa o módulo `chalk` para estilizar o texto no terminal com cores
+const chalk = require('chalk');
 
-operation()
+// Importa o módulo `fs` para manipulação de arquivos no sistema de arquivos
+const fs = require('fs');
+
+// Inicia o processo de operação chamando a função `operation`
+operation();
 
 function operation() {
+  // Exibe um prompt de lista para o usuário escolher uma ação
   inquirer.prompt([
       {
         type: 'list',
         name: 'action',
-        message: 'O que você deseja fazer?',
+        message: 'What would you like to do?',
         choices: [
-          'Criar conta',
-          'Consultar Saldo',
-          'Depositar',
-          'Sacar',
-          'Sair',
+          'Create Account',
+          'Check Balance',
+          'Deposit',
+          'Withdraw',
+          'Exit',
         ],
       },
     ]).then((answer) => {
-      
-      const action = answer['action']
+      const action = answer['action'];
 
-      if (action === 'Criar conta') {
-        createAccount()
-      } else if (action === 'Depositar') {
-        deposit()
-      } else if (action === 'Consultar Saldo') {
-        getAccountBalance()
-      } else if (action === 'Sacar') {
-        withdraw()
-      } else if (action === 'Sair') {
-        console.log(chalk.bgBlue.black('Obrigado por usar o Accounts!'))
-        process.exit()
+      // Chama a função correspondente com base na escolha do usuário
+      if (action === 'Create Account') {
+        createAccount();
+      } else if (action === 'Deposit') {
+        deposit();
+      } else if (action === 'Check Balance') {
+        getAccountBalance();
+      } else if (action === 'Withdraw') {
+        withdraw();
+      } else if (action === 'Exit') {
+        // Exibe uma mensagem de agradecimento e encerra o processo
+        console.log(chalk.bgBlue.black('Thank you for using Accounts!'));
+        process.exit();
       }
-    })
+    });
 }
 
-// create user account
+// Função para criar uma nova conta
 function createAccount() {
-  console.log(chalk.bgGreen.black('Parabéns por escolher nosso banco!'))
-  console.log(chalk.green('Defina as opções da sua conta a seguir'))
+  console.log(chalk.bgGreen.black('Congratulations on choosing our bank!'));
+  console.log(chalk.green('Define your account options below'));
 
-  buildAccount()
+  // Chama a função para construir a conta
+  buildAccount();
 }
 
 function buildAccount() {
+  // Exibe um prompt para o usuário inserir o nome da conta
   inquirer
     .prompt([
       {
         name: 'accountName',
-        message: 'Digite um nome para a sua conta:',
+        message: 'Enter a name for your account:',
       },
     ])
     .then((answer) => {
-      console.info(answer['accountName'])
+      console.info(answer['accountName']);
 
-      const accountName = answer['accountName']
+      const accountName = answer['accountName'];
 
+      // Cria o diretório "accounts" se ele não existir
       if (!fs.existsSync('accounts')) {
-        fs.mkdirSync('accounts')
+        fs.mkdirSync('accounts');
       }
 
+      // Verifica se a conta já existe e solicita um novo nome se necessário
       if (fs.existsSync(`accounts/${accountName}.json`)) {
         console.log(
-          chalk.bgRed.black('Esta conta já existe, escolha outro nome!'),
-        )
-        buildAccount(accountName)
+          chalk.bgRed.black('This account already exists, choose another name!')
+        );
+        buildAccount();
       }
 
+      // Cria um arquivo JSON para a nova conta com saldo inicial de 0
       fs.writeFileSync(
         `accounts/${accountName}.json`,
         '{"balance":0}',
         function (err) {
-          console.log(err)
-        },
-      )
+          console.log(err);
+        }
+      );
 
-      console.log(chalk.green('Parabéns, sua conta foi criada!'))
-      operation()
-    })
+      console.log(chalk.green('Congratulations, your account has been created!'));
+      // Volta para o menu principal
+      operation();
+    });
 }
 
-// add an amount to user account
+// Função para depositar dinheiro em uma conta
 function deposit() {
+  // Exibe um prompt para o usuário inserir o nome da conta
   inquirer
     .prompt([
       {
         name: 'accountName',
-        message: 'Qual o nome da sua conta?',
+        message: 'What is your account name?',
       },
     ])
     .then((answer) => {
-      const accountName = answer['accountName']
+      const accountName = answer['accountName'];
 
+      // Verifica se a conta existe e solicita um novo nome se necessário
       if (!checkAccount(accountName)) {
-        return deposit()
+        return deposit();
       }
 
+      // Exibe um prompt para o usuário inserir o valor a ser depositado
       inquirer
         .prompt([
           {
             name: 'amount',
-            message: 'Quanto você deseja depositar?',
+            message: 'How much would you like to deposit?',
           },
         ])
         .then((answer) => {
-          const amount = answer['amount']
+          const amount = answer['amount'];
 
-          addAmount(accountName, amount)
-          operation()
-        })
-    })
+          // Adiciona o valor ao saldo da conta
+          addAmount(accountName, amount);
+          // Volta para o menu principal
+          operation();
+        });
+    });
 }
 
+// Função para verificar se uma conta existe
 function checkAccount(accountName) {
   if (!fs.existsSync(`accounts/${accountName}.json`)) {
-    console.log(chalk.bgRed.black('Esta conta não existe, escolha outro nome!'))
-    return false
+    console.log(chalk.bgRed.black('This account does not exist, choose another name!'));
+    return false;
   }
-  return true
+  return true;
 }
 
+// Função para ler os dados da conta a partir do arquivo JSON
 function getAccount(accountName) {
   const accountJSON = fs.readFileSync(`accounts/${accountName}.json`, {
     encoding: 'utf8',
     flag: 'r',
-  })
+  });
 
-  return JSON.parse(accountJSON)
+  return JSON.parse(accountJSON);
 }
 
+// Função para adicionar um valor ao saldo da conta
 function addAmount(accountName, amount) {
-  const accountData = getAccount(accountName)
+  const accountData = getAccount(accountName);
 
   if (!amount) {
     console.log(
-      chalk.bgRed.black('Ocorreu um erro, tente novamente mais tarde!'),
-    )
-    return deposit()
+      chalk.bgRed.black('An error occurred, please try again later!')
+    );
+    return deposit();
   }
 
-  accountData.balance = parseFloat(amount) + parseFloat(accountData.balance)
+  // Atualiza o saldo da conta com o valor depositado
+  accountData.balance = parseFloat(amount) + parseFloat(accountData.balance);
 
   fs.writeFileSync(
     `accounts/${accountName}.json`,
     JSON.stringify(accountData),
     function (err) {
-      console.log(err)
-    },
-  )
+      console.log(err);
+    }
+  );
 
   console.log(
-    chalk.green(`Foi depositado o valor de R$  ${amount} na sua conta!`),
-  )
+    chalk.green(`An amount of R$ ${amount} has been deposited into your account!`)
+  );
 }
 
-// return account balance
+// Função para consultar o saldo da conta
 function getAccountBalance() {
+  // Exibe um prompt para o usuário inserir o nome da conta
   inquirer
     .prompt([
       {
         name: 'accountName',
-        message: 'Qual o nome da sua conta?',
+        message: 'What is your account name?',
       },
     ])
     .then((answer) => {
-      const accountName = answer['accountName']
+      const accountName = answer['accountName'];
 
+      // Verifica se a conta existe e solicita um novo nome se necessário
       if (!checkAccount(accountName)) {
-        return getAccountBalance()
+        return getAccountBalance();
       }
 
-      const accountData = getAccount(accountName)
+      const accountData = getAccount(accountName);
 
+      // Exibe o saldo da conta
       console.log(
         chalk.bgBlue.black(
-          `Olá, o saldo da sua conta é de R$${accountData.balance}`,
-        ),
-      )
-      operation()
-    })
+          `Hello, the balance of your account is R$${accountData.balance}`
+        )
+      );
+      // Volta para o menu principal
+      operation();
+    });
 }
 
-// get money from account
+// Função para sacar dinheiro da conta
 function withdraw() {
+  // Exibe um prompt para o usuário inserir o nome da conta
   inquirer
     .prompt([
       {
         name: 'accountName',
-        message: 'Qual o nome da sua conta?',
+        message: 'What is your account name?',
       },
     ])
     .then((answer) => {
-      const accountName = answer['accountName']
+      const accountName = answer['accountName'];
 
+      // Verifica se a conta existe e solicita um novo nome se necessário
       if (!checkAccount(accountName)) {
-        return withdraw()
+        return withdraw();
       }
 
+      // Exibe um prompt para o usuário inserir o valor a ser sacado
       inquirer
         .prompt([
           {
             name: 'amount',
-            message: 'Quanto você deseja sacar?',
+            message: 'How much would you like to withdraw?',
           },
         ])
         .then((answer) => {
-          const amount = answer['amount']
+          const amount = answer['amount'];
 
-          removeAmount(accountName, amount)
-          operation()
-        })
-    })
+          // Remove o valor do saldo da conta
+          removeAmount(accountName, amount);
+          // Volta para o menu principal
+          operation();
+        });
+    });
 }
 
+// Função para remover um valor do saldo da conta
 function removeAmount(accountName, amount) {
-  const accountData = getAccount(accountName)
+  const accountData = getAccount(accountName);
 
   if (!amount) {
     console.log(
-      chalk.bgRed.black('Ocorreu um erro, tente novamente mais tarde!'),
-    )
-    return withdraw()
+      chalk.bgRed.black('An error occurred, please try again later!')
+    );
+    return withdraw();
   }
 
+  // Verifica se o saldo é suficiente para o saque
   if (accountData.balance < amount) {
-    console.log(chalk.bgRed.black('Valor indisponível!'))
-    return withdraw()
+    console.log(chalk.bgRed.black('Insufficient funds!'));
+    return withdraw();
   }
 
-  accountData.balance = parseFloat(accountData.balance) - parseFloat(amount)
+  // Atualiza o saldo da conta com o valor sacado
+  accountData.balance = parseFloat(accountData.balance) - parseFloat(amount);
 
   fs.writeFileSync(
     `accounts/${accountName}.json`,
     JSON.stringify(accountData),
     function (err) {
-      console.log(err)
-    },
-  )
+      console.log(err);
+    }
+  );
 
   console.log(
-    chalk.green(`Foi realizado um saque de R$${amount} da sua conta!`),
-  )
+    chalk.green(`A withdrawal of R$${amount} has been made from your account!`)
+  );
 }
