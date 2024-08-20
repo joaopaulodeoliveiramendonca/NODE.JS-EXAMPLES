@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
   res.sendFile(`${basePath}/index.html`)
 })
 
+
 // Inicia o servidor e faz com que ele comece a escutar na porta definida
 // Quando o servidor estiver em execução, exibe uma mensagem no console com a URL onde o aplicativo está rodando
 app.listen(port, () => {

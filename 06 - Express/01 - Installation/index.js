@@ -47,7 +47,7 @@ const basePath = path.join(__dirname, 'templates');
 
 // Rota para servir a página HTML com a interface básica
 app.get('/', (req, res) => {
-    
+
   // Envia o arquivo HTML como resposta
   res.sendFile(`${basePath}/index.html`);
 });
@@ -142,8 +142,10 @@ app.delete('/users/:id', (req, res) => {
   }
 });
 
-// Inicia o servidor
-app.listen(PORT, () => {
-  // Mensagem no console indicando que o servidor está ativo
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+
+// Inicia o servidor e faz com que ele comece a escutar na porta definida
+// Quando o servidor estiver em execução, exibe uma mensagem no console com a URL onde o aplicativo está rodando
+app.listen(port, () => {
+    console.log(`App running on http://localhost:${port}`)
+  })
+  

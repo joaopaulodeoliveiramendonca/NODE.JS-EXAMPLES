@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
   res.send('Olá Mundo!!') // Envia a resposta 'Olá Mundo!!' para o cliente
 })
 
+
 // Inicia o servidor e faz com que ele comece a escutar na porta definida
 // Quando o servidor estiver em execução, exibe uma mensagem no console com a URL onde o aplicativo está rodando
 app.listen(port, () => {
