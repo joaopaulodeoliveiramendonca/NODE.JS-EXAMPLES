@@ -1,0 +1,42 @@
+No contexto do Node.js, um middleware é uma função que tem acesso ao objeto da solicitação (request), ao objeto de resposta (response) e à próxima função de middleware na pilha de execução de uma aplicação. Os middlewares são amplamente utilizados no framework Express.js, mas o conceito pode ser aplicado em outros contextos de Node.js também.
+
+Um middleware pode realizar várias funções:
+
+Executar código: Por exemplo, logar informações da requisição.
+Modificar objetos de request e response: Adicionar ou alterar dados antes que a requisição chegue à rota ou ao manipulador final.
+Encerrar o ciclo de request/response: Retornar uma resposta ao cliente sem passar para o próximo middleware.
+Chamar o próximo middleware na fila: Se um middleware não encerrar o ciclo, ele deve invocar a função next() para passar a execução para o próximo middleware.
+Estrutura básica de um middleware:
+js
+Copiar código
+app.use((req, res, next) => {
+  console.log('Middleware executado');
+  next(); // Chama o próximo middleware
+});
+Exemplo no Express:
+js
+Copiar código
+const express = require('express');
+const app = express();
+
+// Middleware global que loga a data e hora de cada requisição
+app.use((req, res, next) => {
+  console.log('Request Time:', new Date());
+  next(); // Passa para o próximo middleware ou rota
+});
+
+// Rota de exemplo
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
+});
+Tipos de Middleware:
+Middleware de aplicação: Usado em toda a aplicação ou em rotas específicas.
+Middleware de rota: Executado apenas em uma rota específica.
+Middleware de tratamento de erros: Lida com erros e envia respostas apropriadas.
+Middleware integrado: O Express oferece alguns middlewares prontos, como o express.json() para interpretar JSON no corpo das requisições.
+Middleware de terceiros: Pacotes NPM que fornecem funcionalidades como autenticação ou manipulação de sessões.
+Os middlewares permitem uma modularização e controle flexível sobre o fluxo de requisições/respostas na aplicação.
